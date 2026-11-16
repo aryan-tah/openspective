@@ -23,6 +23,8 @@ class Settings:
     """Where `comments:suggestscore` appends feedback as JSON lines. Unset means it's discarded."""
     public_url: str | None = None
     """Base URL written into the discovery document. Defaults to the URL the request came in on."""
+    preload: bool = True
+    """Load models at startup, so the first request isn't slow."""
 
     @classmethod
     def from_env(cls, env: dict[str, str] | None = None) -> Settings:
@@ -35,4 +37,5 @@ class Settings:
             max_comment_bytes=int(e.get("OPENSPECTIVE_MAX_COMMENT_BYTES", "20480")),
             feedback_path=e.get("OPENSPECTIVE_FEEDBACK_PATH") or None,
             public_url=(e.get("OPENSPECTIVE_PUBLIC_URL") or "").rstrip("/") or None,
+            preload=e.get("OPENSPECTIVE_PRELOAD", "1").lower() not in ("0", "false", "no"),
         )
