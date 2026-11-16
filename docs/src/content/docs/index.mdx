@@ -1,0 +1,76 @@
+---
+title: openspective
+description: Open-source, self-hosted drop-in replacement for Google's Perspective API.
+template: splash
+editUrl: false
+lastUpdated: false
+pagefind: false
+---
+
+<div class="dl-hero">
+  <h1>Perspective API, after December 31</h1>
+  <p>Google shuts Perspective down at the end of 2026. openspective answers the same requests with the same JSON, on your own server, with open models.</p>
+  <div class="dl-actions">
+    <a class="dl-button primary" href="/getting-started/">Get started</a>
+    <a class="dl-button" href="/migrate/overview/">Migrate a client</a>
+    <a class="dl-button" href="https://github.com/aryan-tah/openspective">GitHub</a>
+  </div>
+  <div class="dl-install">
+
+```bash
+docker run -p 8080:8080 ghcr.io/aryan-tah/openspective
+```
+
+  </div>
+</div>
+
+<div class="dl-section">
+
+## Same request, same response
+
+Point your client at openspective instead of `commentanalyzer.googleapis.com`. Nothing else changes.
+
+```bash
+curl -s localhost:8080/v1alpha1/comments:analyze \
+  -H 'content-type: application/json' \
+  -d '{"comment": {"text": "You are a pathetic idiot."},
+       "requestedAttributes": {"TOXICITY": {}, "INSULT": {}}}'
+```
+
+```json
+{
+  "attributeScores": {
+    "TOXICITY": { "summaryScore": { "value": 0.997, "type": "PROBABILITY" }, "spanScores": [ … ] },
+    "INSULT":   { "summaryScore": { "value": 0.995, "type": "PROBABILITY" }, "spanScores": [ … ] }
+  },
+  "languages": ["en"],
+  "detectedLanguages": ["en"]
+}
+```
+
+</div>
+
+<div class="dl-section">
+
+## What you get
+
+<div class="dl-features">
+  <div>
+    <h3>Drop-in compatible</h3>
+    <p>Same paths, fields, span offsets, error types and discovery document. Google's own Python client works against it unchanged.</p>
+  </div>
+  <div>
+    <h3>Seven attributes</h3>
+    <p>TOXICITY, SEVERE_TOXICITY, IDENTITY_ATTACK, INSULT, PROFANITY, THREAT and SEXUALLY_EXPLICIT in English; TOXICITY in six more languages.</p>
+  </div>
+  <div>
+    <h3>Yours to run</h3>
+    <p>One container, CPU only, no network access needed at runtime. Comments never leave your servers, and nothing is stored.</p>
+  </div>
+  <div>
+    <h3>Open models</h3>
+    <p>Detoxify's Apache-2.0 models, which track Perspective closely in published comparisons. No usage terms beyond Apache-2.0.</p>
+  </div>
+</div>
+
+</div>
