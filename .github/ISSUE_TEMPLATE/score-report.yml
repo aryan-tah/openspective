@@ -1,0 +1,30 @@
+name: Wrong score
+description: A comment got a score that's clearly wrong, or very different from what Perspective gave it.
+labels: ["area: models", "status: needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Score reports are how the models and calibration get better. Please only paste text you're allowed to share publicly.
+  - type: textarea
+    id: text
+    attributes:
+      label: Comment text
+    validations:
+      required: true
+  - type: input
+    id: lang
+    attributes:
+      label: Language
+      placeholder: "en"
+  - type: textarea
+    id: scores
+    attributes:
+      label: Scores
+      description: openspective's scores, and Perspective's if you have them.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected and why
