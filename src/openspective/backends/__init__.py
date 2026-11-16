@@ -26,7 +26,7 @@ def load(name: str) -> Backend:
 
         return FakeBackend()
     if name == "detoxify":
-        from openspective.backends.detoxify import DetoxifyBackend  # type: ignore[import-not-found,unused-ignore]
+        from openspective.backends.detoxify import DetoxifyBackend
 
         backend: Backend = DetoxifyBackend()
         return backend
