@@ -41,8 +41,12 @@ async def _body(request: Request) -> dict[str, Any]:
 
 def create_app(settings: Settings | None = None, backend: Backend | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
+    backend = backend or load(settings.backend)
+    preload = getattr(backend, "preload", None)
+    if settings.preload and callable(preload):
+        preload()
     analyzer = Analyzer(
-        backend or load(settings.backend),
+        backend,
         LanguageDetector(fallback=settings.default_language),
         max_comment_bytes=settings.max_comment_bytes,
         feedback_path=settings.feedback_path,
