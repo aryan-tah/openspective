@@ -1,0 +1,13 @@
+openspective
+Copyright 2026 Aryan Tah
+
+This product is not affiliated with, endorsed by, or connected to Google LLC or Jigsaw.
+"Perspective API" is used only to describe the API this software is compatible with.
+
+openspective downloads and runs third-party models at runtime. They are not bundled in
+the Python package; the Docker image includes copies. Each keeps its own license:
+
+- unitary/unbiased-toxic-roberta (Detoxify), Apache-2.0
+  https://huggingface.co/unitary/unbiased-toxic-roberta
+- unitary/multilingual-toxic-xlm-roberta (Detoxify), Apache-2.0
+  https://huggingface.co/unitary/multilingual-toxic-xlm-roberta
